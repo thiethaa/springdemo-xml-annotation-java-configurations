@@ -1,0 +1,55 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- A simple bean definition -->
+    <context:component-scan base-package="com.first_spring_demo"></context:component-scan>
+    <bean id="actors" class="com.first_spring_demo.xmlconfig.Actors">
+        <property name="id" value="101"></property>
+        <property name="name" value="Omar"></property>
+        <!--<constructor-arg value="1"></constructor-arg>-->
+        <!--<constructor-arg value="omar zaman"></constructor-arg>-->
+    </bean>
+    <bean id="actors2" class="com.first_spring_demo.xmlconfig.Actors">
+        <property name="id" value="102"></property>
+        <property name="name" value="Faiz"></property>
+        <!--<constructor-arg value="1"></constructor-arg>-->
+        <!--<constructor-arg value="omar zaman"></constructor-arg>-->
+    </bean>
+    <bean id="series" class="com.first_spring_demo.annotation.Series">
+        <property name="actors">
+            <set>
+                <ref bean="actors"></ref>
+                <ref bean="actors2"></ref>
+            </set>
+        </property>
+
+        <!--<constructor-arg value="1"></constructor-arg>-->
+        <!--<constructor-arg value="omar zaman"></constructor-arg>-->
+    </bean>
+
+    <bean id="fiction" class="com.first_spring_demo.xmlconfig.Fiction">
+        <property name="year" value="1781"></property>
+        <property name="story" value="world war I"></property>
+    </bean>
+    <bean id="fiction2" class="com.first_spring_demo.xmlconfig.Fiction">
+        <property name="year" value="1891"></property>
+        <property name="story" value="world war II"></property>
+    </bean>
+
+    <bean id="documentary" class="com.first_spring_demo.annotation.Documentary">
+        <property name="fiction">
+            <map>
+                <entry key-ref="fiction" value-ref="actors"></entry>
+                <entry key-ref="fiction2" value-ref="actors2"></entry>
+            </map>
+        </property>
+    </bean>
+</beans>
